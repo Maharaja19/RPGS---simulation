@@ -1,29 +1,18 @@
 /* ==========================================================================
-   WIND SIMULATOR SPECIFIC STYLES
+   WIND SIMULATOR SPECIFIC STYLES (LIGHT THEME)
    ========================================================================== */
 
 .wind-theme {
-  --theme-accent: #38bdf8;
-  --theme-accent-glow: rgba(56, 189, 248, 0.35);
-}
-
-.wind-stats-overlay {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  pointer-events: none;
+  --theme-accent: #0284c7;
+  --theme-accent-glow: rgba(2, 132, 199, 0.25);
 }
 
 .wind-pill-tag {
-  background: rgba(10, 15, 30, 0.8);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  color: #38bdf8;
+  background: #e0f2fe;
+  border: 1px solid #bae6fd;
+  color: #0369a1;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   padding: 3px 8px;
   border-radius: 4px;
-  backdrop-filter: blur(4px);
 }

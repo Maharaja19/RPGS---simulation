@@ -1,29 +1,18 @@
 /* ==========================================================================
-   TIDAL SIMULATOR SPECIFIC STYLES
+   TIDAL SIMULATOR SPECIFIC STYLES (LIGHT THEME)
    ========================================================================== */
 
 .tidal-theme {
-  --theme-accent: #6366f1;
-  --theme-accent-glow: rgba(99, 102, 241, 0.35);
-}
-
-.tidal-stats-overlay {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  pointer-events: none;
+  --theme-accent: #6d28d9;
+  --theme-accent-glow: rgba(109, 40, 217, 0.25);
 }
 
 .tidal-pill-tag {
-  background: rgba(10, 15, 30, 0.8);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  color: #a5b4fc;
+  background: #ede9fe;
+  border: 1px solid #ddd6fe;
+  color: #5b21b6;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   padding: 3px 8px;
   border-radius: 4px;
-  backdrop-filter: blur(4px);
 }

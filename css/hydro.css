@@ -1,29 +1,18 @@
 /* ==========================================================================
-   HYDRO SIMULATOR SPECIFIC STYLES
+   HYDRO SIMULATOR SPECIFIC STYLES (LIGHT THEME)
    ========================================================================== */
 
 .hydro-theme {
-  --theme-accent: #06b6d4;
-  --theme-accent-glow: rgba(6, 182, 212, 0.35);
-}
-
-.hydro-stats-overlay {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  pointer-events: none;
+  --theme-accent: #0891b2;
+  --theme-accent-glow: rgba(8, 145, 178, 0.25);
 }
 
 .hydro-pill-tag {
-  background: rgba(10, 15, 30, 0.8);
-  border: 1px solid rgba(6, 182, 212, 0.3);
-  color: #22d3ee;
+  background: #cffafe;
+  border: 1px solid #a5f3fc;
+  color: #0e7490;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   padding: 3px 8px;
   border-radius: 4px;
-  backdrop-filter: blur(4px);
 }
