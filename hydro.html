@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hydroelectric Dam System Simulator | RPGS Assignment – 1</title>
+  <meta name="description" content="Interactive Hydroelectric Dam & Power Generation System Simulator. Energy chain: Reservoir to Penstock to Francis Turbine to Alternator to Substation to Grid.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/hydro.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="app-header">
+    <a href="index.html" class="brand-container">
+      <div class="brand-logo-badge">⚡</div>
+      <div class="brand-text">
+        <h1>RPGS SYSTEM SIMULATOR</h1>
+        <span>Renewable Power Generation Systems</span>
+      </div>
+    </a>
+
+    <div class="assignment-badge">ASSIGNMENT – 1</div>
+
+    <nav class="nav-links">
+      <a href="index.html" class="nav-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Dashboard
+      </a>
+      <a href="solar.html" class="nav-btn">☀️ Solar PV</a>
+      <a href="wind.html" class="nav-btn">💨 Wind Turbine</a>
+      <a href="hydro.html" class="nav-btn active">🌊 Hydro Dam</a>
+      <a href="tidal.html" class="nav-btn">🌊 Tidal Stream</a>
+    </nav>
+  </header>
+
+  <!-- Main Simulator Container -->
+  <main class="view-container">
+
+    <section class="view-section active simulator-view hydro-theme">
+      
+      <!-- Streamlined Header -->
+      <div class="sim-header">
+        <div class="sim-header-left">
+          <a href="index.html" class="back-btn" style="text-decoration: none;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            Dashboard
+          </a>
+          <div class="sim-title-group">
+            <h2>🌊 Hydroelectric Dam &amp; Power Generation System Simulator</h2>
+          </div>
+        </div>
+        <div class="sim-header-actions">
+          <div id="hydro-status-pill" class="status-pill generating">
+            <span class="status-dot"></span>
+            <span id="hydro-status-text">GENERATING</span>
+          </div>
+          <div class="btn-group">
+            <button id="hydro-btn-step" class="btn-ctrl btn-step">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              Step-by-Step Flow
+            </button>
+            <button id="hydro-btn-pause" class="btn-ctrl btn-pause">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+              Pause
+            </button>
+            <button id="hydro-btn-reset" class="btn-ctrl btn-reset">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              Reset
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step-by-Step Walkthrough HUD -->
+      <div id="hydro-step-hud" class="step-walkthrough-hud">
+        <div class="step-hud-info">
+          <div id="hydro-step-hud-title" class="step-hud-title">STEP 1: ENERGY SOURCE (RESERVOIR)</div>
+          <div id="hydro-step-hud-desc" class="step-hud-desc">Water catchment stores gravitational potential energy: E_p = m·g·H. Head H determines hydrostatic pressure.</div>
+        </div>
+        <div class="step-hud-controls">
+          <button id="hydro-step-prev" class="btn-step-nav">◀ Prev</button>
+          <button id="hydro-step-next" class="btn-step-nav">Next ▶</button>
+          <button id="hydro-step-exit" class="btn-step-nav" style="color: #ef4444;">Exit</button>
+        </div>
+      </div>
+
+      <!-- PROCESS FLOW DIAGRAM: 6 STAGES -->
+      <div class="system-flow-card">
+        <div class="process-chain-container">
+          
+          <!-- Stage 1: Reservoir -->
+          <div class="process-stage-block" data-hydro-component="hydro-source" data-hydro-step="1">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="stage-step-num">STAGE 1</span>
+              <span class="stage-energy-badge">Gross Head</span>
+            </div>
+            <div class="stage-name">💧 RESERVOIR</div>
+            <div class="stage-metric-box">
+              <span class="stage-metric-val" id="stage-hydro-source-val">80m (51.0MW)</span>
+            </div>
+            <span class="stage-arrow-connector">▶</span>
+          </div>
+
+          <!-- Stage 2: Penstock -->
+          <div class="process-stage-block" data-hydro-component="hydro-penstock" data-hydro-step="2">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="stage-step-num">STAGE 2</span>
+              <span class="stage-energy-badge">Penstock Flow</span>
+            </div>
+            <div class="stage-name">🌊 PENSTOCK</div>
+            <div class="stage-metric-box">
+              <span class="stage-metric-val" id="stage-hydro-penstock-val">65 m³/s</span>
+            </div>
+            <span class="stage-arrow-connector">▶</span>
+          </div>
+
+          <!-- Stage 3: Francis Runner -->
+          <div class="process-stage-block" data-hydro-component="hydro-turbine" data-hydro-step="3">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="stage-step-num">STAGE 3</span>
+              <span class="stage-energy-badge">Runner Torque</span>
+            </div>
+            <div class="stage-name">🌀 TURBINE</div>
+            <div class="stage-metric-box">
+              <span class="stage-metric-val" id="stage-hydro-turb-val">46.9 MW Mech</span>
+            </div>
+            <span class="stage-arrow-connector">▶</span>
+          </div>
+
+          <!-- Stage 4: Alternator Generator -->
+          <div class="process-stage-block" data-hydro-component="hydro-generator" data-hydro-step="4">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="stage-step-num">STAGE 4</span>
+              <span class="stage-energy-badge">13.8kV AC</span>
+            </div>
+            <div class="stage-name">⚙️ ALTERNATOR</div>
+            <div class="stage-metric-box">
+              <span class="stage-metric-val" id="stage-hydro-gen-val">46.0 MW</span>
+            </div>
+            <span class="stage-arrow-connector">▶</span>
+          </div>
+
+          <!-- Stage 5: Substation -->
+          <div class="process-stage-block" data-hydro-component="hydro-conditioning" data-hydro-step="5">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="stage-step-num">STAGE 5</span>
+              <span class="stage-energy-badge">Substation</span>
+            </div>
+            <div class="stage-name">⚡ SUBSTATION</div>
+            <div class="stage-metric-box">
+              <span class="stage-metric-val" id="stage-hydro-sub-val">45.91 MW AC</span>
+            </div>
+            <span class="stage-arrow-connector">▶</span>
+          </div>
+
+          <!-- Stage 6: Regional Load -->
+          <div class="process-stage-block" data-hydro-component="hydro-load" data-hydro-step="6">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="stage-step-num">STAGE 6</span>
+              <span class="stage-energy-badge">Grid Load</span>
+            </div>
+            <div class="stage-name">🏙️ CITY LOAD</div>
+            <div class="stage-metric-box">
+              <span class="stage-metric-val" id="stage-hydro-load-val">40.0 MW Req</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Animation Stage -->
+      <div class="animation-stage-card">
+        <div class="canvas-container">
+          <canvas id="hydro-canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Consolidated Live Electrical Metrics Bar -->
+      <div class="live-metrics-bar">
+        <div class="metric-pill-card card-power">
+          <span class="metric-pill-label">Generated AC Power</span>
+          <span id="hydro-out-acpower" class="metric-pill-val">45.91 MW</span>
+          <span class="metric-pill-sub">Grid Injected (P_AC)</span>
+        </div>
+
+        <div class="metric-pill-card card-demand">
+          <span class="metric-pill-label">Regional Demand</span>
+          <span id="hydro-out-demand" class="metric-pill-val">40.0 MW</span>
+          <span class="metric-pill-sub">City Grid Demand</span>
+        </div>
+
+        <div class="metric-pill-card card-balance">
+          <span class="metric-pill-label">Power Balance</span>
+          <span id="hydro-out-balance" class="metric-pill-val">+5.91 MW</span>
+          <span class="metric-pill-sub">Net Surplus / Deficit (ΔP)</span>
+        </div>
+
+        <div class="metric-pill-card card-secondary">
+          <span class="metric-pill-label">Voltage &amp; Current</span>
+          <span class="metric-pill-val"><span id="hydro-sub-voltage">13.8 kV</span> · <span id="hydro-sub-current">2135 A</span></span>
+          <span class="metric-pill-sub">Gross Hyd: <span id="hydro-sub-hydpower">51.01 MW</span></span>
+        </div>
+
+        <div class="metric-pill-card card-eff">
+          <span class="metric-pill-label">System Efficiency</span>
+          <span id="hydro-out-eff" class="metric-pill-val">90.0%</span>
+          <span class="metric-pill-sub">Potential → AC Power (η_sys)</span>
+        </div>
+      </div>
+
+      <!-- Controls & Real-Time Telemetry Grid -->
+      <div class="sim-controls-telemetry-grid">
+        
+        <!-- Controls Panel -->
+        <div class="control-panel-card">
+          <div class="panel-header">
+            <h3 class="panel-title">🎛️ Hydraulic &amp; Load Controls</h3>
+          </div>
+
+          <!-- Slider: Head Height -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span class="slider-name">📏 Gross Head (H)</span>
+              <span id="hydro-val-head" class="slider-val-badge">80 m</span>
+            </div>
+            <input type="range" id="hydro-head" min="10" max="150" step="1" value="80">
+          </div>
+
+          <!-- Slider: Water Flow Rate -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span class="slider-name">🌊 Flow Rate / Sluice (Q)</span>
+              <span id="hydro-val-flow" class="slider-val-badge">65 m³/s</span>
+            </div>
+            <input type="range" id="hydro-flow" min="0" max="120" step="1" value="65">
+          </div>
+
+          <!-- Slider: Load Demand -->
+          <div class="slider-group load-slider-group">
+            <div class="slider-label-row">
+              <span class="slider-name">🏙️ Regional Grid Load</span>
+              <span id="hydro-val-loadDemandMW" class="slider-val-badge">40.0 MW</span>
+            </div>
+            <input type="range" id="hydro-loadDemandMW" min="0" max="80.0" step="1.0" value="40.0">
+          </div>
+
+          <!-- Presets -->
+          <div class="presets-container">
+            <span class="presets-label">Presets</span>
+            <div class="preset-buttons-row">
+              <button id="preset-hydro-closed" class="preset-btn hydro-preset-btn">🚫 Closed (0 m³/s)</button>
+              <button id="preset-hydro-baseload" class="preset-btn hydro-preset-btn">⚡ Base (40 m³/s)</button>
+              <button id="preset-hydro-peak" class="preset-btn hydro-preset-btn active">🔥 Peak (65 m³/s)</button>
+              <button id="preset-hydro-max" class="preset-btn hydro-preset-btn">🚀 Max (115 m³/s)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Telemetry Card -->
+        <div class="telemetry-card">
+          <div class="graph-tab-bar">
+            <button class="graph-tab-btn hydro-graph-tab active" data-graph="load-telemetry">Generation vs Demand (Live)</button>
+            <button class="graph-tab-btn hydro-graph-tab" data-graph="stage-flow">Stage Breakdown</button>
+            <button class="graph-tab-btn hydro-graph-tab" data-graph="power-flow">Power vs Flow (P vs Q)</button>
+          </div>
+
+          <div class="graph-canvas-box">
+            <canvas id="hydro-graph-canvas"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Concise Formulas Accordion -->
+      <div class="details-accordion-card open">
+        <div class="accordion-header">
+          <div class="accordion-title">
+            <span>📐</span> Hydroelectric Governing Equation &amp; Validation Check
+          </div>
+          <div class="accordion-icon">▼</div>
+        </div>
+        <div class="accordion-content">
+          <div class="formula-grid">
+            <div class="formula-box">
+              <h4>Hydrodynamic System Formula</h4>
+              <div class="math-display">
+                P(W) = ρ · g · Q · H · η<sub>sys</sub><br>
+                P(MW) = P(W) / 1,000,000<br>
+                ΔP = P<sub>AC</sub> - P<sub>Load</sub>
+              </div>
+            </div>
+
+            <div class="formula-box">
+              <h4>Assignment 1 Default Validation</h4>
+              <div class="math-display">
+                P = 1000 · 9.81 · 65 · 80 · 0.90<br>
+                P = 45,910,800 W ≈ 45.91 MW<br>
+                ΔP = 45.91 - 40.0 = +5.91 MW (Surplus)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Component Inspector Modal -->
+  <div id="component-modal" class="component-modal-backdrop">
+    <div class="component-modal-card">
+      <button id="modal-close-btn" class="modal-close-btn">✕</button>
+      <div class="modal-header">
+        <div class="modal-icon" id="modal-comp-icon">⚡</div>
+        <div class="modal-title-group">
+          <h3 id="modal-comp-name">Component Name</h3>
+          <span id="modal-comp-category">Power Subsystem</span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <p id="modal-comp-desc">Functional description.</p>
+        <div class="modal-grid-specs">
+          <div class="spec-entry">
+            <span class="spec-entry-label">Input Energy Form:</span>
+            <span class="spec-entry-val" id="modal-comp-input">Input Energy</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-entry-label">Output Energy Form:</span>
+            <span class="spec-entry-val" id="modal-comp-output">Output Energy</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-entry-label">Typical Efficiency:</span>
+            <span class="spec-entry-val" id="modal-comp-efficiency">95%</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-entry-label">Governing Principle:</span>
+            <span class="spec-entry-val" id="modal-comp-principles">Physical model</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/electricalModel.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/hydro.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

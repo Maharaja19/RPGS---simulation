@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar PV Energy System Simulator | RPGS Assignment – 1</title>
+  <meta name="description" content="Interactive Solar Photovoltaic & Power Conditioning System Simulator. Energy chain: Sun to PV to MPPT to DC Link to Inverter to Load.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/solar.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="app-header">
+    <a href="index.html" class="brand-container">
+      <div class="brand-logo-badge">⚡</div>
+      <div class="brand-text">
+        <h1>RPGS SYSTEM SIMULATOR</h1>
+        <span>Renewable Power Generation Systems</span>
+      </div>
+    </a>
+
+    <div class="assignment-badge">ASSIGNMENT – 1</div>
+
+    <nav class="nav-links">
+      <a href="index.html" class="nav-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Dashboard
+      </a>
+      <a href="solar.html" class="nav-btn active">☀️ Solar PV</a>
+      <a href="wind.html" class="nav-btn">💨 Wind Turbine</a>
+      <a href="hydro.html" class="nav-btn">🌊 Hydro Dam</a>
+      <a href="tidal.html" class="nav-btn">🌊 Tidal Stream</a>
+    </nav>
+  </header>
+
+  <!-- Main Simulator Container -->
+  <main class="view-container">
+
+    <section class="view-section active simulator-view solar-theme">
+      
+      <!-- Streamlined Header -->
+      <div class="sim-header">
+        <div class="sim-header-left">
+          <a href="index.html" class="back-btn" style="text-decoration: none;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            Dashboard
+          </a>
+          <div class="sim-title-group">
+            <h2>☀️ Solar Photovoltaic (PV) System Simulator</h2>
+          </div>
+        </div>
+        <div class="sim-header-actions">
+          <div id="solar-status-pill" class="status-pill generating">
+            <span class="status-dot"></span>
+            <span id="solar-status-text">GENERATING</span>
+          </div>
+          <div class="btn-group">
+            <button id="solar-btn-step" class="btn-ctrl btn-step">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              Step-by-Step Flow
+            </button>
+            <button id="solar-btn-pause" class="btn-ctrl btn-pause">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+              Pause
+            </button>
+            <button id="solar-btn-reset" class="btn-ctrl btn-reset">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              Reset
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step-by-Step Walkthrough HUD -->
+      <div id="solar-step-hud" class="step-walkthrough-hud">
+        <div class="step-hud-info">
+          <div id="solar-step-hud-title" class="step-hud-title">STEP 1: ENERGY SOURCE (SUN)</div>
+          <div id="solar-step-hud-desc" class="step-hud-desc">Irradiance (W/m²), cloud attenuation, and panel tilt determine incident solar photons.</div>
+        </div>
+        <div class="step-hud-controls">
+          <button id="solar-step-prev" class="btn-step-nav">◀ Prev</button>
+          <button id="solar-step-next" class="btn-step-nav">Next ▶</button>
+          <button id="solar-step-exit" class="btn-step-nav" style="color: #ef4444;">Exit</button>
+        </div>
+      </div>
+
+      <!-- PROCESS FLOW DIAGRAM: 6 STAGES -->
+      <div class="system-flow-card">
+        <div class="process-chain-container">
+          
+          <!-- Stage 1: Sun -->
+          <div class="process-stage-block" data-solar-component="solar-source" data-solar-step="1">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="stage-step-num">STAGE 1</span>
+              <span class="stage-energy-badge">Solar Flux</span>
+            </div>
+            <div class="stage-name">☀️ SUN</div>
+            <div class="stage-metric-box">
+              <span class="stage-metric-val" id="stage-solar-source-val">1.60 kW Flux</span>
+            </div>
+            <span class="stage-arrow-connector">▶</span>
+          </div>
+
+          <!-- Stage 2: PV Panel -->
+          <div class="process-stage-block" data-solar-component="solar-pv" data-solar-step="2">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="stage-step-num">STAGE 2</span>
+              <span class="stage-energy-badge">DC Power</span>
+            </div>
+            <div class="stage-name">🔲 PV PANEL</div>
+            <div class="stage-metric-box">
+              <span class="stage-metric-val" id="stage-solar-pv-val">266.4 W DC</span>
+            </div>
+            <span class="stage-arrow-connector">▶</span>
+          </div>
+
+          <!-- Stage 3: MPPT DC-DC -->
+          <div class="process-stage-block" data-solar-component="solar-mppt" data-solar-step="3">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="stage-step-num">STAGE 3</span>
+              <span class="stage-energy-badge">MPPT (95%)</span>
+            </div>
+            <div class="stage-name">⚡ MPPT DC-DC</div>
+            <div class="stage-metric-box">
+              <span class="stage-metric-val" id="stage-solar-mppt-val">253.1 W</span>
+            </div>
+            <span class="stage-arrow-connector">▶</span>
+          </div>
+
+          <!-- Stage 4: DC Link -->
+          <div class="process-stage-block" data-solar-component="solar-dclink" data-solar-step="4">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="stage-step-num">STAGE 4</span>
+              <span class="stage-energy-badge">DC Bus</span>
+            </div>
+            <div class="stage-name">🔋 DC LINK</div>
+            <div class="stage-metric-box">
+              <span class="stage-metric-val" id="stage-solar-dclink-val">48V Bus</span>
+            </div>
+            <span class="stage-arrow-connector">▶</span>
+          </div>
+
+          <!-- Stage 5: Inverter -->
+          <div class="process-stage-block" data-solar-component="solar-inverter" data-solar-step="5">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="stage-step-num">STAGE 5</span>
+              <span class="stage-energy-badge">DC → AC</span>
+            </div>
+            <div class="stage-name">🔄 INVERTER</div>
+            <div class="stage-metric-box">
+              <span class="stage-metric-val" id="stage-solar-inv-val">240.4 W AC</span>
+            </div>
+            <span class="stage-arrow-connector">▶</span>
+          </div>
+
+          <!-- Stage 6: Load -->
+          <div class="process-stage-block" data-solar-component="solar-load" data-solar-step="6">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="stage-step-num">STAGE 6</span>
+              <span class="stage-energy-badge">AC Load</span>
+            </div>
+            <div class="stage-name">🏠 LOAD</div>
+            <div class="stage-metric-box">
+              <span class="stage-metric-val" id="stage-solar-load-val">250 W Req</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Animation Stage -->
+      <div class="animation-stage-card">
+        <div class="canvas-container">
+          <canvas id="solar-canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Consolidated Live Electrical Metrics Bar -->
+      <div class="live-metrics-bar">
+        <div class="metric-pill-card card-power">
+          <span class="metric-pill-label">Generated AC Power</span>
+          <span id="solar-out-acpower" class="metric-pill-val">240.4 W</span>
+          <span class="metric-pill-sub">Inverter Output (P_AC)</span>
+        </div>
+
+        <div class="metric-pill-card card-demand">
+          <span class="metric-pill-label">Load Demand</span>
+          <span id="solar-out-demand" class="metric-pill-val">250.0 W</span>
+          <span class="metric-pill-sub">Active Consumer Load</span>
+        </div>
+
+        <div class="metric-pill-card card-balance">
+          <span class="metric-pill-label">Power Balance</span>
+          <span id="solar-out-balance" class="metric-pill-val">-9.6 W</span>
+          <span class="metric-pill-sub">Net Surplus / Deficit (ΔP)</span>
+        </div>
+
+        <div class="metric-pill-card card-secondary">
+          <span class="metric-pill-label">Voltage &amp; Current</span>
+          <span class="metric-pill-val"><span id="solar-sub-acvolt">230 V</span> · <span id="solar-sub-accurr">1.05 A</span></span>
+          <span class="metric-pill-sub">DC Link: <span id="solar-sub-dclink">48.0 V DC</span></span>
+        </div>
+
+        <div class="metric-pill-card card-eff">
+          <span class="metric-pill-label">System Efficiency</span>
+          <span id="solar-out-eff" class="metric-pill-val">15.0%</span>
+          <span class="metric-pill-sub">Sunlight → AC Power (η_sys)</span>
+        </div>
+      </div>
+
+      <!-- Controls & Real-Time Telemetry Grid -->
+      <div class="sim-controls-telemetry-grid">
+        
+        <!-- Controls Panel -->
+        <div class="control-panel-card">
+          <div class="panel-header">
+            <h3 class="panel-title">🎛️ Input Controls &amp; Load Demand</h3>
+          </div>
+
+          <!-- Slider: Solar Irradiance -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span class="slider-name">☀️ Irradiance (G)</span>
+              <span id="solar-val-irradiance" class="slider-val-badge">1000 W/m²</span>
+            </div>
+            <input type="range" id="solar-irradiance" min="0" max="1200" step="10" value="1000">
+          </div>
+
+          <!-- Slider: Panel Temperature -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span class="slider-name">🌡️ Temperature (T)</span>
+              <span id="solar-val-temperature" class="slider-val-badge">25 °C</span>
+            </div>
+            <input type="range" id="solar-temperature" min="10" max="50" step="1" value="25">
+          </div>
+
+          <!-- Slider: Panel Tilt -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span class="slider-name">📐 Panel Tilt (θ<sub>tilt</sub>)</span>
+              <span id="solar-val-tilt" class="slider-val-badge">35°</span>
+            </div>
+            <input type="range" id="solar-tilt" min="0" max="90" step="1" value="35">
+          </div>
+
+          <!-- Slider: Cloud Density -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span class="slider-name">☁️ Cloud Density</span>
+              <span id="solar-val-cloudDensity" class="slider-val-badge">10%</span>
+            </div>
+            <input type="range" id="solar-cloudDensity" min="0" max="100" step="1" value="10">
+          </div>
+
+          <!-- Slider: Sun Position -->
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span class="slider-name">🌅 Sun Elevation</span>
+              <span id="solar-val-solarAngle" class="slider-val-badge">55°</span>
+            </div>
+            <input type="range" id="solar-solarAngle" min="0" max="90" step="1" value="55">
+          </div>
+
+          <!-- Slider: Load Demand -->
+          <div class="slider-group load-slider-group">
+            <div class="slider-label-row">
+              <span class="slider-name">🏠 AC Load Demand</span>
+              <span id="solar-val-loadDemand" class="slider-val-badge">250 W</span>
+            </div>
+            <input type="range" id="solar-loadDemand" min="0" max="500" step="5" value="250">
+          </div>
+
+          <!-- Presets -->
+          <div class="presets-container">
+            <span class="presets-label">Presets</span>
+            <div class="preset-buttons-row">
+              <button id="preset-solar-clear" class="preset-btn solar-preset-btn active">☀️ Clear Sky</button>
+              <button id="preset-solar-partly" class="preset-btn solar-preset-btn">⛅ Partly Cloudy</button>
+              <button id="preset-solar-overcast" class="preset-btn solar-preset-btn">☁️ Overcast</button>
+              <button id="preset-solar-storm" class="preset-btn solar-preset-btn">⛈️ Storm</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Telemetry Card -->
+        <div class="telemetry-card">
+          <div class="graph-tab-bar">
+            <button class="graph-tab-btn solar-graph-tab active" data-graph="load-telemetry">Generation vs Load (Live)</button>
+            <button class="graph-tab-btn solar-graph-tab" data-graph="stage-flow">Stage Breakdown</button>
+            <button class="graph-tab-btn solar-graph-tab" data-graph="iv">PV I-V Curve</button>
+          </div>
+
+          <div class="graph-canvas-box">
+            <canvas id="solar-graph-canvas"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Concise Formulas Accordion -->
+      <div class="details-accordion-card open">
+        <div class="accordion-header">
+          <div class="accordion-title">
+            <span>📐</span> Governing Formulas &amp; Conversion Chain
+          </div>
+          <div class="accordion-icon">▼</div>
+        </div>
+        <div class="accordion-content">
+          <div class="formula-grid">
+            <div class="formula-box">
+              <h4>System Conversion Chain</h4>
+              <div class="math-display">
+                P<sub>PV</sub> = G<sub>eff</sub> · A · η<sub>PV</sub>(T)<br>
+                P<sub>DC_Link</sub> = P<sub>PV</sub> · η<sub>MPPT</sub> (95%)<br>
+                P<sub>AC</sub> = P<sub>DC_Link</sub> · η<sub>Inv</sub> (95%)<br>
+                ΔP = P<sub>AC</sub> - P<sub>Load</sub>
+              </div>
+            </div>
+
+            <div class="formula-box">
+              <h4>Effective Irradiance &amp; Balance</h4>
+              <div class="math-display">
+                G<sub>eff</sub> = G · cos(|θ<sub>sun</sub> - θ<sub>tilt</sub>|) · (1 - CloudLoss)<br>
+                η<sub>overall</sub> = η<sub>PV</sub> · η<sub>MPPT</sub> · η<sub>Inv</sub><br>
+                ΔP &gt; 0: Surplus | ΔP &lt; 0: Deficit
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Component Inspector Modal -->
+  <div id="component-modal" class="component-modal-backdrop">
+    <div class="component-modal-card">
+      <button id="modal-close-btn" class="modal-close-btn">✕</button>
+      <div class="modal-header">
+        <div class="modal-icon" id="modal-comp-icon">⚡</div>
+        <div class="modal-title-group">
+          <h3 id="modal-comp-name">Component Name</h3>
+          <span id="modal-comp-category">Power Subsystem</span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <p id="modal-comp-desc">Functional description.</p>
+        <div class="modal-grid-specs">
+          <div class="spec-entry">
+            <span class="spec-entry-label">Input Energy Form:</span>
+            <span class="spec-entry-val" id="modal-comp-input">Input Energy</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-entry-label">Output Energy Form:</span>
+            <span class="spec-entry-val" id="modal-comp-output">Output Energy</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-entry-label">Typical Efficiency:</span>
+            <span class="spec-entry-val" id="modal-comp-efficiency">95%</span>
+          </div>
+          <div class="spec-entry">
+            <span class="spec-entry-label">Governing Principle:</span>
+            <span class="spec-entry-val" id="modal-comp-principles">Physical model</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/electricalModel.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/solar.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

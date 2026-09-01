@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPGS - Renewable Energy System Simulation Dashboard | Assignment – 1</title>
+  <meta name="description" content="Interactive Renewable Power Generation Systems Simulator covering Solar, Wind, Hydro, and Tidal complete energy conversion chains and electrical load balancing.">
+  
+  <!-- Google Fonts: Inter, Outfit, Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- Top Application Navigation Bar -->
+  <header class="app-header">
+    <a href="index.html" class="brand-container">
+      <div class="brand-logo-badge">⚡</div>
+      <div class="brand-text">
+        <h1>RPGS SYSTEM SIMULATOR</h1>
+        <span>Renewable Power Generation Systems</span>
+      </div>
+    </a>
+
+    <div class="assignment-badge">ASSIGNMENT – 1</div>
+
+    <nav class="nav-links">
+      <a href="index.html" class="nav-btn active">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Dashboard
+      </a>
+      <a href="solar.html" class="nav-btn">☀️ Solar PV</a>
+      <a href="wind.html" class="nav-btn">💨 Wind Turbine</a>
+      <a href="hydro.html" class="nav-btn">🌊 Hydro Dam</a>
+      <a href="tidal.html" class="nav-btn">🌊 Tidal Stream</a>
+    </nav>
+  </header>
+
+  <!-- Main View Container -->
+  <main class="view-container">
+
+    <section class="view-section active">
+      <div class="dashboard-hero">
+        <div class="hero-tag">
+          <span class="status-dot"></span> RPGS ACADEMIC SIMULATION PLATFORM
+        </div>
+        <h2 class="hero-title">
+          Renewable Energy <span class="gradient-text">System Simulators</span>
+        </h2>
+        <p class="hero-subtitle">
+          Interactive Renewable Power Generation Systems (RPGS) Simulator. Explore complete energy conversion pipelines: <strong>Source → Converter → Generator → Power Conditioning → Inverter → Load</strong>.
+        </p>
+        <div class="hero-meta-badges">
+          <div class="meta-pill">⚡ End-to-End System Pipeline</div>
+          <div class="meta-pill">⚖️ Dynamic Load Balancing (Surplus/Deficit)</div>
+          <div class="meta-pill">🔬 Step-by-Step Educational Walkthrough</div>
+          <div class="meta-pill">📊 Multi-Stage Power Conversion Telemetry</div>
+        </div>
+      </div>
+
+      <!-- 4 Module Selection Cards -->
+      <div class="sim-cards-grid">
+
+        <!-- Solar Card -->
+        <a href="solar.html" class="sim-card card-solar" style="text-decoration: none; color: inherit;">
+          <div>
+            <div class="sim-card-top">
+              <div class="sim-card-icon">☀️</div>
+              <span class="sim-card-badge">PHOTOVOLTAIC</span>
+            </div>
+            <div class="sim-card-body">
+              <h3>SOLAR ENERGY SYSTEM</h3>
+              <div class="sim-card-subtitle">Sunlight → PV → MPPT → DC Link → Inverter → Load</div>
+              <p class="sim-card-desc">
+                Simulates complete PV power conversion from solar radiation through silicon cells, MPPT DC-DC optimization, 48V DC bus link, and pure-sine AC inversion into residential load.
+              </p>
+              <div class="sim-card-features">
+                <span class="feature-tag">Sun Tracking &amp; Tilt</span>
+                <span class="feature-tag">MPPT Tracking (95%)</span>
+                <span class="feature-tag">Residential Load Balancing</span>
+              </div>
+            </div>
+          </div>
+          <div class="sim-card-footer">
+            <span class="card-tech-info">P_AC = P_PV · η_mppt · η_inv</span>
+            <span class="open-sim-btn">
+              Open Simulator
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Wind Card -->
+        <a href="wind.html" class="sim-card card-wind" style="text-decoration: none; color: inherit;">
+          <div>
+            <div class="sim-card-top">
+              <div class="sim-card-icon">💨</div>
+              <span class="sim-card-badge">AERODYNAMIC</span>
+            </div>
+            <div class="sim-card-body">
+              <h3>WIND ENERGY SYSTEM</h3>
+              <div class="sim-card-subtitle">Wind → Rotor → Shaft → Gen → Rectifier → Inverter → Load</div>
+              <p class="sim-card-desc">
+                Models aerodynamic lift, low-speed shaft torque, alternator electricity generation, active AC-DC rectification, DC link buffering, and grid-synchronized AC inversion into industrial loads.
+              </p>
+              <div class="sim-card-features">
+                <span class="feature-tag">V³ Kinetic Model</span>
+                <span class="feature-tag">Betz Limit (Cp ≤ 0.593)</span>
+                <span class="feature-tag">MW-Scale Load Balancing</span>
+              </div>
+            </div>
+          </div>
+          <div class="sim-card-footer">
+            <span class="card-tech-info">P_AC = ½ ρ A V³ Cp η_gen η_rect η_inv</span>
+            <span class="open-sim-btn">
+              Open Simulator
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Hydro Card -->
+        <a href="hydro.html" class="sim-card card-hydro" style="text-decoration: none; color: inherit;">
+          <div>
+            <div class="sim-card-top">
+              <div class="sim-card-icon">🌊</div>
+              <span class="sim-card-badge">HYDROELECTRIC</span>
+            </div>
+            <div class="sim-card-body">
+              <h3>HYDRO ENERGY SYSTEM</h3>
+              <div class="sim-card-subtitle">Reservoir → Penstock → Turbine → Gen → Substation → Grid</div>
+              <p class="sim-card-desc">
+                Simulates potential energy transformation in dam reservoirs through pressurized penstock flow, Francis runner rotation, synchronous alternator excitation, and high-voltage grid transmission.
+              </p>
+              <div class="sim-card-features">
+                <span class="feature-tag">Head &amp; Flow Dynamics</span>
+                <span class="feature-tag">45.91 MW Validated</span>
+                <span class="feature-tag">Regional Grid Load Demand</span>
+              </div>
+            </div>
+          </div>
+          <div class="sim-card-footer">
+            <span class="card-tech-info">P_AC = ρ g Q H η_sys</span>
+            <span class="open-sim-btn">
+              Open Simulator
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Tidal Card -->
+        <a href="tidal.html" class="sim-card card-tidal" style="text-decoration: none; color: inherit;">
+          <div>
+            <div class="sim-card-top">
+              <div class="sim-card-icon">🌊</div>
+              <span class="sim-card-badge">HYDROKINETIC</span>
+            </div>
+            <div class="sim-card-body">
+              <h3>TIDAL ENERGY SYSTEM</h3>
+              <div class="sim-card-subtitle">Current → Subsea Rotor → Gen → Umbilical → Inverter → Load</div>
+              <p class="sim-card-desc">
+                Visualizes hydrokinetic subsea turbine energy capture in dense seawater ($\rho=1025\text{ kg/m}^3$), subsea power generation, HVDC seabed umbilical transmission, and coastal settlement load matching.
+              </p>
+              <div class="sim-card-features">
+                <span class="feature-tag">Seawater (1025 kg/m³)</span>
+                <span class="feature-tag">Subsea Umbilical DC Link</span>
+                <span class="feature-tag">Coastal Load Balancing</span>
+              </div>
+            </div>
+          </div>
+          <div class="sim-card-footer">
+            <span class="card-tech-info">P_AC = ½ ρ_sw A V³ Cp η_sys</span>
+            <span class="open-sim-btn">
+              Open Simulator
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </span>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- Dashboard Summary -->
+      <div class="dashboard-summary-section">
+        <h3 style="font-family: var(--font-display); font-size: 1.2rem; color: var(--text-primary);">
+          RPGS Assignment – 1 System Conversion Architecture
+        </h3>
+        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.25rem;">
+          How Renewable Resources Transform Into Usable Grid Electricity
+        </p>
+
+        <div class="summary-grid">
+          <div class="summary-item">
+            <h4>☀️ Solar PV Pipeline</h4>
+            <p>Photons $\to$ Silicon Lattice $\to$ DC Electricity $\to$ MPPT Tracking $\to$ DC Link Capacitor $\to$ Pure-Sine Inverter $\to$ AC Load.</p>
+          </div>
+          <div class="summary-item">
+            <h4>💨 Wind Aerodynamic Pipeline</h4>
+            <p>Kinetic Airflow $\to$ Aerofoil Lift $\to$ Mechanical Shaft Torque $\to$ Alternator $\to$ AC-DC Rectifier $\to$ Inverter $\to$ Grid Load.</p>
+          </div>
+          <div class="summary-item">
+            <h4>🌊 Hydro Gravitational Pipeline</h4>
+            <p>Catchment Head $\to$ Pressurized Penstock $\to$ Francis Runner $\to$ Synchronous Alternator $\to$ Substation $\to$ High-Voltage Grid.</p>
+          </div>
+          <div class="summary-item">
+            <h4>🌊 Tidal Hydrokinetic Pipeline</h4>
+            <p>Marine Stream $\to$ Subsea Rotor $\to$ Sealed Alternator $\to$ Umbilical DC Cable $\to$ Onshore Inverter $\to$ Coastal Grid.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

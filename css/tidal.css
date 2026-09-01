@@ -1,0 +1,29 @@
+/* ==========================================================================
+   TIDAL SIMULATOR SPECIFIC STYLES
+   ========================================================================== */
+
+.tidal-theme {
+  --theme-accent: #6366f1;
+  --theme-accent-glow: rgba(99, 102, 241, 0.35);
+}
+
+.tidal-stats-overlay {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.tidal-pill-tag {
+  background: rgba(10, 15, 30, 0.8);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  color: #a5b4fc;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+}

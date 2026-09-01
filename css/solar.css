@@ -1,0 +1,35 @@
+/* ==========================================================================
+   SOLAR SIMULATOR SPECIFIC STYLES
+   ========================================================================== */
+
+.solar-theme {
+  --theme-accent: #f59e0b;
+  --theme-accent-glow: rgba(245, 158, 11, 0.35);
+}
+
+.solar-hud-badge {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+/* Solar canvas overlay indicators */
+.solar-stats-overlay {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.solar-pill-tag {
+  background: rgba(10, 15, 30, 0.8);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fbbf24;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+}
